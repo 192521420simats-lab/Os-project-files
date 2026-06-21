@@ -1,0 +1,56 @@
+#include <stdio.h>
+struct Record
+{
+    int recordNumber;
+    char data[50];
+};
+
+int main()
+{
+    struct Record records[100];
+    int n = 0, searchRecord, i, found;
+
+    printf("Enter records (Enter '0' as record number to exit):\n");
+
+    while (1)
+    {
+        printf("Record Number: ");
+        scanf("%d", &records[n].recordNumber);
+
+        if (records[n].recordNumber == 0)
+            break;
+
+        printf("Data: ");
+        scanf(" %[^\n]", records[n].data);
+
+        n++;
+    }
+
+    while (1)
+    {
+        printf("Enter the record number to read (0 to exit): ");
+        scanf("%d", &searchRecord);
+
+        if (searchRecord == 0)
+            break;
+
+        found = 0;
+
+        /* Sequential access */
+        for (i = 0; i < n; i++)
+        {
+            if (records[i].recordNumber == searchRecord)
+            {
+                printf("Record Number: %d\n", records[i].recordNumber);
+                printf("Data: %s\n", records[i].data);
+                found = 1;
+                break;
+            }
+        }
+
+        if (!found)
+            printf("Record not found.\n");
+    }
+
+    return 0;
+}
